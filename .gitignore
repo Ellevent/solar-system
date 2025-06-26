@@ -1,0 +1,6 @@
+# Node and general dependencies
+node_modules/
+.DS_Store
+.env
+# Build artifacts
+/dist
