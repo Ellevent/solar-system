@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Solar System Simulation</title>
+    <meta name="description" content="Interactive 3D visualization of the Solar System using WebGL and Three.js.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://solar-system.lamdalf.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="3D Solar System Simulation">
+    <meta property="og:description" content="Explore an interactive model of the Solar System right in your browser.">
+    <meta property="og:url" content="https://solar-system.lamdalf.com/">
+    <meta property="og:image" content="https://solar-system.lamdalf.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="3D Solar System Simulation">
+    <meta name="twitter:description" content="Explore an interactive model of the Solar System right in your browser.">
+    <meta name="twitter:image" content="https://solar-system.lamdalf.com/og-image.png">
+    <link rel="icon" href="https://solar-system.lamdalf.com/favicon.ico">
+    <link rel="apple-touch-icon" href="https://solar-system.lamdalf.com/apple-touch-icon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body { 
@@ -11,8 +25,10 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
-        canvas { 
+        canvas {
             display: block;
+            width: 100%;
+            height: 100%;
         }
         #info {
             position: absolute;
@@ -48,8 +64,13 @@
     </style>
 </head>
 <body>
+    <canvas id="webglCanvas" role="img" aria-label="3D Solar System simulation">
+        Your browser does not support WebGL. Please see the
+        <a href="https://en.wikipedia.org/wiki/Solar_System">Solar System article</a>
+        for more information.
+    </canvas>
     <div id="info">
-        <h2>Solar System Simulation</h2>
+        <h1>Solar System Simulation</h1>
         <p>Selected Planet: <span id="selectedPlanet">None</span></p>
         <p id="planetInfo"></p>
     </div>
@@ -404,9 +425,8 @@
             camera.position.set(0, 50, 100);
 
             // Create renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer = new THREE.WebGLRenderer({ antialias: true, canvas: document.getElementById('webglCanvas') });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
 
             // Add stars background
             createStars();
