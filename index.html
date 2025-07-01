@@ -668,7 +668,7 @@
             if (intersects.length > 0) {
                 const planetObj = planets.find(p => p.mesh === intersects[0].object);
                 if (planetObj) {
-                    window.location.href = 'planets/' + planetObj.data.name + '.html';
+                    window.open('planets/' + planetObj.data.name + '.html', '_blank');
                 }
             }
         }
