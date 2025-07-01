@@ -467,6 +467,7 @@
             document.getElementById('toggleLabels').addEventListener('click', toggleLabels);
             document.getElementById('resetCamera').addEventListener('click', resetCamera);
             document.getElementById('speedSlider').addEventListener('input', updateSpeed);
+            renderer.domElement.addEventListener('click', onCanvasClick);
 
             // Start animation
             animate();
@@ -653,6 +654,22 @@
                 }
             } else {
                 selectedObject = null;
+            }
+        }
+
+        // Handle click on a planet to open its detail page
+        function onCanvasClick(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const planetMeshes = planets.map(p => p.mesh);
+            const intersects = raycaster.intersectObjects(planetMeshes);
+            if (intersects.length > 0) {
+                const planetObj = planets.find(p => p.mesh === intersects[0].object);
+                if (planetObj) {
+                    window.location.href = 'planets/' + planetObj.data.name + '.html';
+                }
             }
         }
 
